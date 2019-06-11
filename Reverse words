@@ -1,0 +1,27 @@
+using System;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+
+public static class Kata
+{
+  public static string ReverseWords(string str)
+  {
+            string[] words = str.Split(new char[] { ' ' });
+            //not arraylist
+            var arr = new List<string>();
+
+
+            foreach (var item in words)
+            {
+                char[] word = item.ToCharArray();
+                Array.Reverse(word);
+                //not string s = word.Tostring();idk why
+                string s = new string(word);
+                arr.Add(s);
+            }
+            // string.Join very usefull
+            string ss = string.Join<string>(" ", arr);
+            return ss;
+  }
+}
