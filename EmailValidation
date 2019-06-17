@@ -1,0 +1,32 @@
+using System;
+using System.Text.RegularExpressions;
+
+namespace EmailValidation
+{
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            //Enter something(pref email)
+            string s = Console.ReadLine();
+            //call method with s parametr
+            EmailValid(s);
+        }
+        //email validation method
+        public static void EmailValid(string email)
+        {
+            /**
+             * [-a-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*  EMAL NAME - FIRTSLY CUZ OTHERWISE IT PERCEIVED AS INTERVAL
+             * THEN 1 OR MORE SYMBOLS AND COMPONENTS EXPRESSION IN () OPTIONAL
+             * [a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)  HOSTNAME  AT FIRST MAIN SYMBOLS THEN OPTIONAL PART
+             * (?:biz|com|edu|gov|mil|name|net|org|[a-z][a-z]) TOP-LEVEL DOMAINS OR COUNTRY DOMAIN COSIST OF 2 SYMBOLS
+             */
+            string valid = @"^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(?:biz|com|edu|gov|mil|name|net|org|[a-z][a-z])$";
+            //find a match between string pattern and input string
+            if (Regex.IsMatch(email, valid))
+                Console.WriteLine("VALID");
+            else
+                Console.WriteLine("WRONG");
+        }
+    }
+}
