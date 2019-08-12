@@ -1,0 +1,87 @@
+internal class Decryption
+    {
+        static void Main(string[] args)
+        {
+            string path = @"D:\projects\Message.txt";
+
+            try
+            {
+                string encryptedMessage = ReadFile(path);
+                string decryptedMessage = MessageDecryption(encryptedMessage);
+                string fileName = GetFileName(path);
+                Console.WriteLine($"Name of the file: {fileName}");
+                Console.WriteLine($"Decrypted Message: {decryptedMessage}");
+                Console.ReadLine();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+                throw;
+            }
+
+        }
+
+        private static string ReadFile(string path)
+        {
+            string encryptedMessage;
+
+            try
+            {
+                using (StreamReader streamReader = new StreamReader(path))
+                {
+                    encryptedMessage = streamReader.ReadToEnd();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+                throw;
+            }
+
+            return encryptedMessage;
+        }
+
+        private static string MessageDecryption(string encryptedMessage)
+        {
+            string decryptedMessage;
+
+            try
+            {
+                for(int i = 0; i < encryptedMessage.Length - 1; i++)
+                {
+                    if(encryptedMessage[i] == encryptedMessage[i + 1])
+                    {
+                        encryptedMessage = encryptedMessage.Replace($"{encryptedMessage[i]}{encryptedMessage[i + 1]}", "");
+                        i = 0;
+                    }
+                }
+
+                decryptedMessage = encryptedMessage;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+                throw;
+            }
+
+            return decryptedMessage;
+        }
+
+        private static string GetFileName(string path)
+        {
+            FileInfo fileInfo;
+
+            try
+            {
+                fileInfo = new FileInfo(path);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+                throw;
+            }
+
+            return fileInfo.Name;
+        }
+    }
