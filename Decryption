@@ -1,4 +1,9 @@
-internal class Decryption
+using System;
+using System.IO;
+
+namespace DecryptionApp
+{
+    internal class Decryption
     {
         static void Main(string[] args)
         {
@@ -85,3 +90,4 @@ internal class Decryption
             return fileInfo.Name;
         }
     }
+}
